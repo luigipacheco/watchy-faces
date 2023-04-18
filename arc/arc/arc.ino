@@ -65,18 +65,25 @@ void arc::drawWatchFace() {
   int steps =  sensor.getCounter()*190/10000+1;
   int rx = 60;
   int ry = 60;
-  int offset = 10;
-  int w = 6;
+  int offset = 15;
+  int w = 10;
+  String day = String(currentTime.Day);
+  String month = String(currentTime.Month);
   unsigned int colour = GxEPD_WHITE;
+display.setFont(&FreeMonoBold9pt7b);
 display.drawCircle(x, y,  rx,colour);
 display.drawCircle(x, y,  rx + offset,colour);
 fillArc2(display, x, y, start_angle, minutes, rx+w/2, ry+w/2, w, colour);
 fillArc2(display, x, y, start_angle, hours, rx+offset+w/2, ry+offset+w/2, w, colour);
 //display.drawRect(5, 5, 5, 190, colour);
 display.drawLine(5, 190, 195, 190, colour);
-display.fillRect(5, 187, steps, 6, colour);
+display.fillRect(5, 186, steps, 8, colour);
+display.setCursor(100, 105);
+
+display.println(month+"/"+day);
+//display.fillRect(5, 185, 190, 10, colour);
 if(lowBattery){
-  display.drawCircle(x, y,  10,colour);
+  display.drawCircle(25, 25, 10,colour);
 }
   display.refresh();
 }
